@@ -3,7 +3,7 @@
         <nav class="nav">
             <h2 class="title">实用案例</h2>
             <ul>
-                <li v-for="(value, key) in lis" :key="key" class="g-hover" @click="activeLi = key">{{value}}</li>
+                <li :class="{'active': activeLi === key}"  v-for="(value, key) in lis" :key="key" class="g-hover" @click="activeLi = key">{{value}}</li>
             </ul>
         </nav>
         <div class="content">
@@ -23,12 +23,23 @@
 </template>
 <script>
 import transfer from '@/components/Cases/Transfer';
+import flowChart from '@/components/Cases/FlowChart';
+import treeTable from '@/components/Cases/TreeTable';
+import bgSvg from '@/components/Cases/BgSvg';
 export default {
-    components: { transfer },
+    components: { 
+        transfer,
+        flowChart,
+        treeTable,
+        bgSvg
+    },
     data () {
         return {
             lis: {
-                transfer: '穿梭框'
+                transfer: '穿梭框',
+                flowChart: '使用canvas画流程图',
+                treeTable: '属性表格的增删改查',
+                bgSvg: '使用svg或图片当背景图',
             },
             activeLi: 'transfer',
 
@@ -48,6 +59,9 @@ export default {
         padding-top: 15px;
         .title {
             text-align: center;
+        }
+        li.active {
+            color: #3a84ff;
         }
         .nav-item {
             padding: 10px;

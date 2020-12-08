@@ -7,7 +7,7 @@
                     <span class="g-pointer" @click.stop.prevent="selectAll">全部添加</span>
                 </div>
                 <div class="trans-search">
-                    <a-input v-model="searchValue" placeholder="输入关键字按回车搜索">
+                    <a-input v-model="searchValue" placeholder="输入关键字按回车搜索" allow-clear>
                         <a-icon slot="prefix" type="search" />
                     </a-input>
                 </div>

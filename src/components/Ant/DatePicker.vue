@@ -1,7 +1,10 @@
 <template>
   <div>
-    <a-date-picker :value="moment(dateValue, dateFormat)" :format="dateFormat" @change="dateChange"/>
+    <a-date-picker :value="dateValue ? moment(dateValue, dateFormat) : null" :format="dateFormat" @change="dateChange"/>
     <button @click="show">点击</button>
+    <div class="value-content">
+      <p>日期的值：{{dateValue}}</p>
+    </div>
   </div>
 </template>
 <script>
@@ -25,8 +28,17 @@ export default {
       console.log(this.dateValue)
     },
     dateChange (date, dateString) {
+      console.log(date, dateString);
       this.dateValue = dateString
     }
   },
 };
 </script>
+<style lang="scss" scoped>
+  .value-content {
+    margin-top: 30px;
+    p {
+      line-height: 32px;
+    }
+  }
+</style>

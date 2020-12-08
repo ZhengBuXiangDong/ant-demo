@@ -18,18 +18,5 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  .g {
-    &-pointer {
-      cursor: pointer;
-    }
-    &-hover{
-      cursor: pointer;
-      &:hover{
-        color: #3a84ff;
-      }
-    }
-
-  }
-  
 }
 </style>

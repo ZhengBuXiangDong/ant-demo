@@ -3,7 +3,7 @@
         <nav class="nav">
             <h2 class="title">ant的实用</h2>
             <ul>
-                <li v-for="(value, key) in lis" :key="key" class="g-hover" @click="activeLi = key">{{value}}</li>
+                <li :class="{'active': activeLi === key}" v-for="(value, key) in lis" :key="key" class="g-hover" @click="activeLi = key">{{value}}</li>
             </ul>
         </nav>
         <div class="content">
@@ -23,12 +23,14 @@
 </template>
 <script>
 import datePicker from '@/components/Ant/DatePicker';
+import editTable from '@/components/Ant/EditTable';
 export default {
-    components: { datePicker },
+    components: { datePicker, editTable },
     data () {
         return {
             lis: {
-                datePicker: '日期选择器'
+                datePicker: '日期选择器',
+                editTable: '可编辑表格'
             },
             activeLi: 'datePicker',
 
@@ -48,6 +50,10 @@ export default {
         padding-top: 15px;
         .title {
             text-align: center;
+            
+        }
+        li.active {
+            color: #3a84ff;
         }
         .nav-item {
             padding: 10px;
