@@ -26,22 +26,31 @@ import transfer from '@/components/Cases/Transfer';
 import flowChart from '@/components/Cases/FlowChart';
 import treeTable from '@/components/Cases/TreeTable';
 import bgSvg from '@/components/Cases/BgSvg';
+import highlight from '@/components/Cases/Highlight';
+import formCheck from '@/components/Cases/FormCheck';
+import gridHover from '@/components/Cases/GridHover';
 export default {
     components: { 
         transfer,
         flowChart,
         treeTable,
-        bgSvg
+        bgSvg,
+        highlight,
+        formCheck,
+        gridHover
     },
     data () {
         return {
             lis: {
                 transfer: '穿梭框',
                 flowChart: '使用canvas画流程图',
-                treeTable: '属性表格的增删改查',
+                treeTable: '树形结构的增删改查',
                 bgSvg: '使用svg或图片当背景图',
+                highlight: '查找高亮',
+                formCheck: '表单异步校验',
+                gridHover: '日历滑动渐变'
             },
-            activeLi: 'transfer',
+            activeLi: 'transfer'
 
         }
     }
