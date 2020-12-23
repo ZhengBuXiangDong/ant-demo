@@ -3,8 +3,8 @@ import VueRouter from 'vue-router'
 
 // 引入路由组件文件
 const Home = () => import(/* webpackChunkName: 'home' */'./views/Home.vue')
-const Ant = () => import(/* webpackChunkName: 'ant' */'./views/Ant.vue')
-const Cases = () => import('./views/Cases.vue')
+const Ant = () => import(/* webpackChunkName: 'ant' */'./views/Ant/index.vue')
+const Cases = () => import(/* webpackChunkName: 'ant' */'./views/Cases/index.vue')
 
 Vue.use(VueRouter)
 const routes = [

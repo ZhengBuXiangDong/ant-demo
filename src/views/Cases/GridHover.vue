@@ -125,8 +125,9 @@ table.dataTable > tbody {
     background-size: 92px 92px;
     background-position: -92px -92px;
     background-repeat: no-repeat;
-    height: 276px;
+    height: 267px;
     overflow: auto;
+    margin-bottom: 5px;
 }
 
 table.dataTable > tbody > tr >td, table.dataTable > thead > tr > th {

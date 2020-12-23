@@ -1,9 +1,9 @@
 <template>
-    <section class="ant-temp">
+    <section class="casestemp">
         <nav class="nav">
-            <h2 class="title">ant的实用</h2>
+            <h2 class="title">实用案例</h2>
             <ul>
-                <li :class="{'active': activeLi === key}" v-for="(value, key) in lis" :key="key" class="g-hover" @click="activeLi = key">{{value}}</li>
+                <li :class="{'active': activeLi === key}"  v-for="(value, key) in lis" :key="key" class="g-hover" @click="activeLi = key">{{value}}</li>
             </ul>
         </nav>
         <div class="content">
@@ -22,24 +22,45 @@
     </section>
 </template>
 <script>
-import datePicker from '@/components/Ant/DatePicker';
-import editTable from '@/components/Ant/EditTable';
+import transfer from './Transfer';
+import flowChart from './FlowChart';
+import treeTable from './TreeTable';
+import bgSvg from './BgSvg';
+import highlight from './Highlight';
+import formCheck from './FormCheck';
+import gridHover from './GridHover';
+import vCharts from './VCharts';
 export default {
-    components: { datePicker, editTable },
+    components: { 
+        transfer,
+        flowChart,
+        treeTable,
+        bgSvg,
+        highlight,
+        formCheck,
+        gridHover,
+        vCharts
+    },
     data () {
         return {
             lis: {
-                datePicker: '日期选择器',
-                editTable: '可编辑表格'
+                transfer: '穿梭框',
+                flowChart: '使用canvas画流程图',
+                treeTable: '树形结构的增删改查',
+                bgSvg: '使用svg或图片当背景图',
+                highlight: '查找高亮',
+                formCheck: '表单异步校验',
+                gridHover: '日历滑动渐变',
+                vCharts: 'v-chart图表'
             },
-            activeLi: 'datePicker',
+            activeLi: 'transfer'
 
         }
     }
 }
 </script>
 <style lang="scss" scoped>
-.ant-temp {
+.casestemp {
     width: 100%;
     height: 100%;
     display: flex;
@@ -50,7 +71,6 @@ export default {
         padding-top: 15px;
         .title {
             text-align: center;
-            
         }
         li.active {
             color: #3a84ff;
