@@ -1,5 +1,5 @@
 <template>
-    <section>
+    <section class="charts">
         <h2>堆叠面积图</h2>
         <ve-line :data="chartData" :settings="chartSettings" :extend="extend"></ve-line>
     </section>
@@ -37,4 +37,8 @@ export default {
 
 </script>
 <style lang='scss' scoped>
+.charts {
+    height: 100%;
+    overflow: auto;
+}
 </style>

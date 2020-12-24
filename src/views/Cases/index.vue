@@ -95,6 +95,7 @@ export default {
         &-main{
             flex: 1;
             padding: 15px;
+            overflow: hidden;
         }
     }
     

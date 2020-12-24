@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{margin: 0;padding: 0;}
+        i{font-style: normal;;}
+        #tab{margin: 100px auto; width: 1000px; border: 1px solid orange;}
+        .nav{display: flex; border-bottom: 1px solid #ddd;justify-content: space-between; align-items: center;}
+        .nav ul{display: flex; padding: 0; height: 40px;}
+        .nav ul li{cursor: pointer; list-style: none; border-right: 1px solid #ddd;position: relative; display: flex; align-items: center;justify-content: center; padding: 10px; padding-right: 50px;}
+        .nav ul li .close{position: absolute; right: 4px; width: 12px; height: 12px;background-color: #fff;border-radius: 50%; font-size: 12px; color: #333;line-height: 11px;text-align: center;}
+        .nav ul li:hover .close{display: inline-block;}
+        .nav ul li .close:hover{color: #fff;background-color: #3a84ff;;}
+        .addtab{cursor: pointer;border: 1px solid #ddd;width: 20px; height: 20px;margin-right: 10px; text-align: center;line-height: 19px;}
+        .active::after{content: '';position: absolute; left: 0;bottom: -1px; display: block; height: 1px; width: 100%;background-color: #fff;}
+        .content{height: 500px; overflow: auto;}
+        .content>div{display: none;white-space: pre-wrap;padding: 20px;min-height: 500px; box-sizing: border-box;} 
+        .content .actcon{display: block;}
+    </style>
+</head>
+<body>
+    <div id="tab">
+        <div class="nav">
+            <ul>
+                <li class="active"><span>测试1</span><i class="close">×</i></li>
+                <li><span>测试2</span> <i class="close">×</i> </li>
+                <li><span>测试3</span> <i class="close">×</i> </li>
+            </ul>
+            <div class="addtab">
+                <i>+</i>
+            </div>
+        </div>
+        <div class="content">
+            <div class="actcon">测试1</div>
+            <div>测试2</div>
+            <div>测试3</div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+    var that
+    class Tab {
+        constructor(id) {
+            //获取元素
+            that = this
+            this.main = document.querySelector(id);
+            this.add = this.main.querySelector('.addtab')
+            //li的父元素
+            this.ul = this.main.querySelector('.nav ul')
+            //div内容的父元素
+            this.con = this.main.querySelector('.content')
+            this.init();
+        }
+        init() {
+            this.updateNade()
+            // 初始化操作让相关的元素绑定事件
+            this.add.onclick = this.addTab;
+            for(let i = 0; i < this.lis.length; i++){
+                this.lis[i].index = i;
+                //注意：方法后面不要加括号，否则一开始就会调用函数
+                this.lis[i].onclick = this.toggleTab; 
+                this.delBtn[i].onclick = this.removeTab;
+                this.spans[i].ondblclick = this.editTab;
+                this.divs[i].ondblclick = this.editTab;
+            }
+
+        }
+        updateNade() {
+            this.lis = this.main.querySelectorAll('li');
+            this.divs = this.main.querySelectorAll('.content>div');
+            this.delBtn = this.main.querySelectorAll('.close')
+            this.spans = this.main.querySelectorAll('.nav ul li span')
+        }
+        clearClass() {
+            //清空active
+            for(let i =0; i< this.lis.length;i++){
+                this.lis[i].className=''
+                this.divs[i].className = ''
+            }
+        }
+        // 1. 切换功能
+        toggleTab() {
+            that.clearClass();
+            this.className = 'active';
+            that.divs[this.index].className  = 'actcon'
+        }
+        // 2. 添加功能
+        addTab() {
+            //（1）创建li元素和div元素
+            //（2）追加到各自的父元素中
+            /*
+                element.insertAdjacentHTML(position，text)
+                    *参数一：beforebegin：元素自身的前面
+                            afterbegin：插入元素内部的第一个子节点之前
+                            beforeend：插入元素内部的最后一个子节点之后
+                            afterend：元素自身的后面
+                    *参数二：新增节点的字符串形式
+            */
+            that.clearClass();
+            const newLi = `<li class="active"><span>New Tab</span> <i class="close">×</i> </li>`
+            const newDiv = `<div class="actcon">添加内容${Math.random()}</div>`
+            that.ul.insertAdjacentHTML('beforeend',newLi)
+            that.con.insertAdjacentHTML('beforeend',newDiv)
+            that.init()
+        }
+        // 3. 删除功能
+        removeTab(e) {
+            e.stopPropagation() //阻止冒泡
+            let index = this.parentNode.index;
+            that.lis[index].remove();
+            that.divs[index].remove();
+            that.init()
+            if(document.querySelector('.active')) return //删除的不是选中状态
+            index--;
+            that.lis[index] ? that.lis[index].click() : that.lis.length !== 0 && that.lis[0].click()
+        }
+        // 4.修改功能
+        editTab(e) {
+            // 双击禁止选中文字
+            window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty(); 
+            let con = this.innerHTML
+            let html = this.nodeName === 'SPAN' ? `<input type="text"/>` : `<textarea rows="30" cols="130"></textarea>`
+            this.innerHTML = html
+            let input = this.children[0];
+            input.value = con
+            input.select();
+            input.onblur = function() {
+                this.parentNode.innerHTML = this.value ? this.value : con
+            }
+            input.onkeyup = function(e) {
+                // if(e.ctrlKey && e.keyCode === 13){
+                //     let con = this.value+'\n';//手动增加换行符
+                //     this.value = con
+                //     this.focus()
+                // } else if(!e.ctrlKey && e.keyCode === 13) {
+                //     this.blur();
+                // }
+                if(e.keyCode === 13) {
+                    this.blur();
+                }
+            }
+        }
+    }
+    function watermark(settings) {
+        //默认设置
+        var defaultSettings={
+            watermarl_element:"body",
+            watermark_txt:"",
+            watermark_x:20,//水印起始位置x轴坐标
+            watermark_y:20,//水印起始位置Y轴坐标
+            watermark_rows:2000,//水印行数
+            watermark_cols:2000,//水印列数
+            watermark_x_space:70,//水印x轴间隔
+            watermark_y_space:30,//水印y轴间隔
+            watermark_color:'#aaa',//水印字体颜色
+            watermark_alpha:0.4,//水印透明度
+            watermark_fontsize:'15px',//水印字体大小
+            watermark_font:'微软雅黑',//水印字体
+            watermark_width:210,//水印宽度
+            watermark_height:80,//水印长度
+            watermark_angle:15//水印倾斜度数
+        };
+        //采用配置项替换默认值，作用类似jquery.extend
+        if(arguments.length===1&&typeof arguments[0] ==="object" )
+        {
+            var src=arguments[0]||{};
+            for(key in src)
+            {
+                if(src[key]&&defaultSettings[key]&&src[key]===defaultSettings[key])
+                    continue;
+                else if(src[key])
+                    defaultSettings[key]=src[key];
+            }
+        }
+
+        var oTemp = document.createDocumentFragment();
+
+
+        var maskElement=document.getElementById(defaultSettings.watermarl_element)||document.body;
+        maskElement.style.position = "relative"
+
+        //获取页面最大宽度
+        var page_width = Math.max(maskElement.scrollWidth,maskElement.clientWidth);
+
+        //获取页面最大高度
+        var page_height = Math.max(maskElement.scrollHeight,maskElement.clientHeight);
+
+        //水印数量自适应元素区域尺寸
+        defaultSettings.watermark_cols=Math.ceil(page_width/(defaultSettings.watermark_x_space+defaultSettings.watermark_width));
+        defaultSettings.watermark_rows=Math.ceil(page_height/(defaultSettings.watermark_y_space+defaultSettings.watermark_height));
+        var x;
+        var y;
+        for (var i = 0; i < defaultSettings.watermark_rows; i++) {
+            y = defaultSettings.watermark_y + (defaultSettings.watermark_y_space + defaultSettings.watermark_height) * i;
+            for (var j = 0; j < defaultSettings.watermark_cols; j++) {
+                x = defaultSettings.watermark_x + (defaultSettings.watermark_width + defaultSettings.watermark_x_space) * j;
+                var mask_div = document.createElement('div');
+                mask_div.id = 'mask_div' + i + j;
+                mask_div.className = 'mask_div';
+                //mask_div.appendChild(document.createTextNode(defaultSettings.watermark_txt));
+                mask_div.innerHTML=(defaultSettings.watermark_txt);
+                //设置水印div倾斜显示
+                mask_div.style.webkitTransform = "rotate(-" + defaultSettings.watermark_angle + "deg)";
+                mask_div.style.MozTransform = "rotate(-" + defaultSettings.watermark_angle + "deg)";
+                mask_div.style.msTransform = "rotate(-" + defaultSettings.watermark_angle + "deg)";
+                mask_div.style.OTransform = "rotate(-" + defaultSettings.watermark_angle + "deg)";
+                mask_div.style.transform = "rotate(-" + defaultSettings.watermark_angle + "deg)";
+                mask_div.style.visibility = "";
+                mask_div.style.position = "absolute";
+                mask_div.style.left = x + 'px';
+                mask_div.style.top = y + 'px';
+                mask_div.style.overflow = "hidden";
+                mask_div.style.zIndex = "9999";
+                mask_div.style.pointerEvents='none';//pointer-events:none  让水印不遮挡页面的点击事件
+                //mask_div.style.border="solid #eee 1px";　　　　　　　　　　//兼容IE9以下的透明度设置                mask_div.style.filter="alpha(opacity=50)";
+                mask_div.style.opacity = defaultSettings.watermark_alpha;
+                mask_div.style.fontSize = defaultSettings.watermark_fontsize;
+                mask_div.style.fontFamily = defaultSettings.watermark_font;
+                mask_div.style.color = defaultSettings.watermark_color;
+                mask_div.style.textAlign = "center";
+                mask_div.style.width = defaultSettings.watermark_width + 'px';
+                mask_div.style.height = defaultSettings.watermark_height + 'px';
+                mask_div.style.display = "block";
+                oTemp.appendChild(mask_div);
+            };
+        };
+        maskElement.appendChild(oTemp);
+    }  
+    //调用方法
+    watermark({"watermarl_element":"tab",　　"watermark_txt":"郑怡的选项卡"})
+    let tab = new Tab('#tab')
+    tab.init()
+</script>
+</html>

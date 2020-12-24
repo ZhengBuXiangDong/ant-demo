@@ -77,46 +77,67 @@
 .p20{ padding: 20px; }
 .p25{ padding: 25px; }
 
-.pl0{ paddinleft: 0; }
-.pl1{ paddinleft: 1px; }
-.pl2{ paddinleft: 2px; }
-.pl3{ paddinleft: 3px; }
-.pl4{ paddinleft: 4px; }
-.pl5{ paddinleft: 5px; }
-.pl10{ paddinleft: 10px; }
-.pl15{ paddinleft: 15px; }
-.pl20{ paddinleft: 20px; }
-.pl25{ paddinleft: 25px; }
+.pl0{ padding-left: 0; }
+.pl1{ padding-left: 1px; }
+.pl2{ padding-left: 2px; }
+.pl3{ padding-left: 3px; }
+.pl4{ padding-left: 4px; }
+.pl5{ padding-left: 5px; }
+.pl10{ padding-left: 10px; }
+.pl15{ padding-left: 15px; }
+.pl20{ padding-left: 20px; }
+.pl25{ padding-left: 25px; }
 
-.pr0{ paddinright: 0; }
-.pr1{ paddinright: 1px; }
-.pr2{ paddinright: 2px; }
-.pr3{ paddinright: 3px; }
-.pr4{ paddinright: 4px; }
-.pr5{ paddinright: 5px; }
-.pr10{ paddinright: 10px; }
-.pr15{ paddinright: 15px; }
-.pr20{ paddinright: 20px; }
-.pr25{ paddinright: 25px; }
+.pr0{ padding-right: 0; }
+.pr1{ padding-right: 1px; }
+.pr2{ padding-right: 2px; }
+.pr3{ padding-right: 3px; }
+.pr4{ padding-right: 4px; }
+.pr5{ padding-right: 5px; }
+.pr10{ padding-right: 10px; }
+.pr15{ padding-right: 15px; }
+.pr20{ padding-right: 20px; }
+.pr25{ padding-right: 25px; }
 
-.pt0{ paddintop: 0; }
-.pt1{ paddintop: 1px; }
-.pt2{ paddintop: 2px; }
-.pt3{ paddintop: 3px; }
-.pt4{ paddintop: 4px; }
-.pt5{ paddintop: 5px; }
-.pt10{ paddintop: 10px; }
-.pt15{ paddintop: 15px; }
-.pt20{ paddintop: 20px; }
-.pt25{ paddintop: 25px; }
+.pt0{ padding-top: 0; }
+.pt1{ padding-top: 1px; }
+.pt2{ padding-top: 2px; }
+.pt3{ padding-top: 3px; }
+.pt4{ padding-top: 4px; }
+.pt5{ padding-top: 5px; }
+.pt10{ padding-top: 10px; }
+.pt15{ padding-top: 15px; }
+.pt20{ padding-top: 20px; }
+.pt25{ padding-top: 25px; }
 
-.pb0{ paddinbottom: 0; }
-.pb1{ paddinbottom: 1px; }
-.pb2{ paddinbottom: 2px; }
-.pb3{ paddinbottom: 3px; }
-.pb4{ paddinbottom: 4px; }
-.pb5{ paddinbottom: 5px; }
-.pb10{ paddinbottom: 10px; }
-.pb15{ paddinbottom: 15px; }
-.pb20{ paddinbottom: 20px; }
-.pb25{ paddinbottom: 25px; }
+.pb0{ padding-bottom: 0; }
+.pb1{ padding-bottom: 1px; }
+.pb2{ padding-bottom: 2px; }
+.pb3{ padding-bottom: 3px; }
+.pb4{ padding-bottom: 4px; }
+.pb5{ padding-bottom: 5px; }
+.pb10{ padding-bottom: 10px; }
+.pb15{ padding-bottom: 15px; }
+.pb20{ padding-bottom: 20px; }
+.pb25{ padding-bottom: 25px; }
+
+
+// 滚动条
+::-webkit-scrollbar {
+    height: 6px;
+    width: 4px;
+    background: none;
+}
+
+::-webkit-scrollbar-corner {
+    display: none;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.11);
+    border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.37);
+}
