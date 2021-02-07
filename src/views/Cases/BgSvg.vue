@@ -1,12 +1,12 @@
 <template>
   <div class="demo">
     <p>背景图</p>
-    <div class="img1"></div>
-    <div class="img2"></div>
+    <span>svg</span>:<div class="img1"></div>
+    <span>png</span>:<div class="img2"></div>
     <!-- 图3 -->
     <p>图片</p>
-    <img src="~@/assets/svg/model-trans.svg" width="100">
-    <img src="~@/assets/image/logo.png" width="100">
+    <span>svg</span>: <img src="~@/assets/svg/model-trans.svg" width="100"><br>
+    <span>png</span>: <img src="~@/assets/image/logo.png" width="100">
   </div>
 </template>
 <style>

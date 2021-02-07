@@ -1,7 +1,7 @@
 <template>
     <section class="ant-temp">
         <nav class="nav">
-            <h2 class="title">ant的实用</h2>
+            <h2 class="title">ant的测试</h2>
             <ul>
                 <li :class="{'active': activeLi === key}" v-for="(value, key) in lis" :key="key" class="g-hover" @click="activeLi = key">{{value}}</li>
             </ul>

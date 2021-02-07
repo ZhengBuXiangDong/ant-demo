@@ -6,14 +6,14 @@
         <th v-for="item in tHeader" :key="item.dataIndex">{{item.title}}</th>
       </tr>
     </thead>
-    <tbody v-for="(item, index) in list" :key="index + 'range'" >
+    <tbody v-for="(item, index) in list" :key="index" >
         <template v-for="(taskItem, taskIndex) in item.task_type_list">
           <template v-for="(teamItem, teamIndex) in taskItem.team_list">
             <template v-for="(cardItem, cardIndex) in teamItem.card_type_list">
-              <tr :key="index + taskIndex + teamIndex + cardIndex + 'item'">
+              <tr :key="'' + index + taskIndex + teamIndex +  cardIndex ">
                 <td v-if="taskIndex + teamIndex + cardIndex === 0" :rowspan="item.span">{{item.range}}</td>
                 <td v-if="taskIndex + teamIndex + cardIndex === 0" :rowspan="item.span - 1">{{item.creator}}</td>
-                <td v-if="teamIndex === 0 && cardIndex === 0" :rowspan="taskItem.taskSpan">{{taskItem.task_type_name}}td>
+                <td v-if="teamIndex === 0 && cardIndex === 0" :rowspan="taskItem.taskSpan">{{taskItem.task_type_name}}</td>
                 <td v-if="cardIndex === 0" :rowspan="teamItem.teamSpan">{{teamItem.team_name}}</td>
                 <td v-if="cardIndex === 0" :rowspan="teamItem.teamSpan">{{teamItem.team_category}}</td>
                 <td v-if="cardIndex === 0" :rowspan="teamItem.teamSpan">{{teamItem.team_id}}</td>
@@ -33,7 +33,7 @@
                 <td>{{cardItem.step1_label_accuracy}}</td>
               </tr>
             </template>
-            <tr :key="index + taskIndex + teamIndex">
+            <tr :key="'' + index + taskIndex + teamIndex">
               <td colspan="4">{{teamItem.team_name}}汇总</td>
               <td>{{teamItem.team_summary.total_cost}}nihao</td>
               <td>{{teamItem.team_summary.normal_sum}}</td>
@@ -50,7 +50,7 @@
               <td>{{teamItem.team_summary.step1_label_accuracy}}</td>
             </tr>
           </template>
-          <tr :key="index + taskIndex">
+          <tr :key="'' + index + taskIndex">
             <td colspan="5">{{taskItem.task_type_name}}汇总</td>
             <td>{{taskItem.task_type_summary.total_cost}}</td>
             <td>{{taskItem.task_type_summary.normal_sum}}</td>
@@ -385,7 +385,7 @@ export default {
     ];
     return {
       tHeader,
-      list,
+      list: [...list],
       dataInit: false
       // columns,
     };

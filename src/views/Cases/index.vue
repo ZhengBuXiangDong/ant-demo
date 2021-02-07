@@ -1,7 +1,7 @@
 <template>
     <section class="casestemp">
         <nav class="nav">
-            <h2 class="title">实用案例</h2>
+            <h2 class="title">测试案例</h2>
             <ul>
                 <li :class="{'active': activeLi === key}"  v-for="(value, key) in lis" :key="key" class="g-hover" @click="activeLi = key">{{value}}</li>
             </ul>
@@ -30,6 +30,8 @@ import highlight from './Highlight';
 import formCheck from './FormCheck';
 import gridHover from './GridHover';
 import vCharts from './VCharts';
+import tableSpan from './TableSpan';
+import gantt from './test';
 export default {
     components: { 
         transfer,
@@ -39,7 +41,9 @@ export default {
         highlight,
         formCheck,
         gridHover,
-        vCharts
+        vCharts,
+        gantt,
+        tableSpan
     },
     data () {
         return {
@@ -51,9 +55,11 @@ export default {
                 highlight: '查找高亮',
                 formCheck: '表单异步校验',
                 gridHover: '日历滑动渐变',
-                vCharts: 'v-chart图表'
+                vCharts: 'echart图表',
+                gantt: '甘特图',
+                tableSpan: '表格合并'
             },
-            activeLi: 'transfer'
+            activeLi: 'tableSpan'
 
         }
     }
